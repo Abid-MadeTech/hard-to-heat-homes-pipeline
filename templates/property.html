@@ -1,0 +1,81 @@
+{% extends "base.html"%}
+{% block content%}
+<div class="govuk-width-container">
+    <a href="{{url_for('home')}}" class="govuk-back-link">Home</a>
+    <main class="govuk-main-wrapper">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <h1 id="{{property.uprn}}" class="govuk-heading-xl">
+                {{ property.address }}
+          </h1>
+        </div>
+      </div>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <table class="govuk-table">
+                <tbody class="govuk-table__body">
+                  <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">UPRN</th>
+                        <td class="govuk-table__cell">{{property.uprn}}</td>
+                  </tr>
+                  <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">Connectivity</th>
+                    <td class="govuk-table__cell">{{property.connectivity}}</td>
+                  </tr>
+                  <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">Building Materials</th>
+                    <td class="govuk-table__cell">{{property.material}}</td>
+                  </tr>
+                  <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">Year Of Construction</th>
+                    <td class="govuk-table__cell">{{property.age}}</td>
+                  </tr>
+                  <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">EPC Rating</th>
+                    <td class="govuk-table__cell">{{property.epc_rating}}</td>
+                  </tr>
+                  <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">EPC Points</th>
+                    <td class="govuk-table__cell">{{property.epc_score}}</td>
+                  </tr>
+                  <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">Hard To Heat Score</th>
+                    <td class="govuk-table__cell">{{property.score}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+        </div>
+        <div class="govuk-grid-column-one-third">
+          <div id="map" style="height: 300px; margin-top: 2rem"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  
+  {% block scripts %}
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+  <script defer>
+    window.onload = function() {
+        if ('{{property.address}}' == "") {
+            setAddress({{property.uprn}}, {{property.uprn}}, '{{key}}');
+        }
+
+        const map = L.map('map').setView([{{property.lat}}, {{property.long}}], 15);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        const marker = L.marker([{{property.lat}}, {{property.long}}]).addTo(map);
+    }
+    
+    
+  </script>
+  {% endblock %}
+  
+{% endblock %}
