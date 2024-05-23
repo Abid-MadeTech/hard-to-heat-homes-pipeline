@@ -11,7 +11,8 @@ with open("tests/test_data/os_dummy_data.json", "r") as data:
 QUERY_PARAMS = "uprn=200002791"
 HEADERS = {"Accept": "application/json", "Authorization": f"Basic {EPC_TOKEN}"}
 
-epc_test_property = epc_api_call(HEADERS, QUERY_PARAMS)["rows"][0]
+epc_test_property = epc_api_call(HEADERS, QUERY_PARAMS)
+# epc_test_property = epc_api_call(HEADERS, QUERY_PARAMS)["rows"][0]
 
 
 def test_property_has_uprn():
