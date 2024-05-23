@@ -1,11 +1,10 @@
 # Buildspec runs in the build stage of your pipeline.
 version: 0.2
 env:
-  secrets-manager:
     # MY_ENV_VAR: "value-for-my-env-var"
   # Pass secrets from AWS Systems Manager (SSM) Parameter Store.
-    EPC_ENCODED_API_TOKEN: epc-api-key
-    OS_API_KEY: os-api-key  # The key is the name of the environment variable, the value is the name of the SSM parameter.
+  EPC_ENCODED_API_TOKEN: epc-api-key
+  OS_API_KEY: os-api-key  # The key is the name of the environment variable, the value is the name of the SSM parameter.
 phases:
   install:
     runtime-versions: 
