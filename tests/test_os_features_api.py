@@ -30,8 +30,7 @@ def test_200_response():
 def test_features_array_is_populated():
     assert len(response["features"]) > 0
 
-first_building = response
-# first_building = response["features"][0]["properties"]
+first_building = response["features"][0]["properties"]
 def test_one_building_accessing_desired_response_data():
     print(f'>>>>>>>>>>>>>{OS_KEY}')
     assert first_building["connectivity"] == "Semi-Connected"
