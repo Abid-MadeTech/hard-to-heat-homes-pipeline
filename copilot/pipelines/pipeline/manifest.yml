@@ -29,5 +29,7 @@ stages:
     # Optional: use test commands to validate this stage of your build.
     # test_commands: [echo 'running tests', make test]
 
-
+secrets:                      # Pass secrets from AWS Systems Manager (SSM) Parameter Store.
+  EPC_ENCODED_API_TOKEN: epc-api-key
+  OS_API_KEY: os-api-key  # The key is the name of the environment variable, the value is the name of the SSM parameter.
 
