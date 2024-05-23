@@ -12,6 +12,8 @@ phases:
     commands:
       - echo "Run your tests"
       # - make test
+      - pytest -s tests/
+
   post_build:
     commands:
       - ls -l
